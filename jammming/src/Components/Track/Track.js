@@ -32,7 +32,14 @@ class Track extends React.Component {
         return (   
             <div className="Track">
             <div className="Track-information">
-                <h3>{this.props.track.name}</h3>
+                <div className="preview-pane">
+                    <h3>{this.props.track.name}</h3>
+                    {this.trackPreview}
+                    <audio controls>
+                        <source src={this.props.track.preview}></source>
+                        Your browser does not support the audio tag
+                    </audio>
+                </div>
                 <p>{this.props.track.artist} | {this.props.track.album}</p>
             </div>
             {this.renderAction()}
