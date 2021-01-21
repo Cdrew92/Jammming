@@ -29,10 +29,7 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log("Search results:" + this.state.searchResults.length)
-    console.log("Playlist:" + this.state.playlistTracks.length)
     let removeDuplicates = this.state.searchResults.filter(duplicate => !this.state.playlistTracks.includes(duplicate));
-    console.log("removeDuplicates:" + removeDuplicates.length)
     if (this.state.searchResults.length == removeDuplicates.length){
       return;
     }
@@ -76,6 +73,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+  <div id="overlay"></div>
   <h1>Ja<span className="highlight">mmm</span>ing</h1>
   <div className="App">
     <SearchBar 
