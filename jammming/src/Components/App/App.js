@@ -15,6 +15,7 @@ class App extends React.Component {
     searchResults: [],
     playlistName: 'New Playlist',
     playlistTracks: [],
+    loading: false
     }
 
     this.addTrack = this.addTrack.bind(this);
@@ -54,11 +55,15 @@ class App extends React.Component {
   }
 
   savePlaylist() {
+    if (!this.state.loading) {
+      this.setState({ loading: true })
+    }
     const trackUris = this.state.playlistTracks.map(playlistTrack => playlistTrack.uri);
     Spotify.savePlaylist(this.state.playlistName, trackUris).then(() => {
       this.setState({
         playlistName: 'New Playlist',
-        playlistTracks: []
+        playlistTracks: [],
+        loading: false
       })
     })
   }
@@ -69,11 +74,12 @@ class App extends React.Component {
       searchResults: searchResults})
     });
   }
-  
+
   render() {
     return (
       <div>
-  <div id="overlay"></div>
+        {console.log(this.state.loading)}
+  <div style={{display: this.state.loading ? 'block' : 'none'}} id="overlay"></div>
   <h1>Ja<span className="highlight">mmm</span>ing</h1>
   <div className="App">
     <SearchBar 
@@ -92,6 +98,7 @@ class App extends React.Component {
         playlistName={this.state.searchResults} 
         playlistTracks={this.state.playlistTracks}
         onSave={this.savePlaylist}
+        loading={this.state.loading}
       />
     </div>
   </div>
