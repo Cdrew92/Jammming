@@ -24,6 +24,17 @@
     flex-direction: column;
     justify-content: center;
     height: 72px;
+    margin: 5px 0;
+  }
+
+  .Track-information > .preview-pane {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .preview-pane > audio {
+    height: 20px;
+    margin: 5px 0 10px 0;
   }
   
   .Track-information h3 {
