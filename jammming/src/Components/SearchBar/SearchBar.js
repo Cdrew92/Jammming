@@ -17,6 +17,7 @@ class SearchBar extends React.Component {
 
     handleTermChange(e) {
         this.setState({term: e.target.value})
+        this.props.storeSearch(e.target.value);
     }
 
     handleKeyPress(e) {
@@ -29,7 +30,7 @@ class SearchBar extends React.Component {
     render() {
         return (
         <div className="SearchBar">
-        <input onChange={this.handleTermChange} onKeyPress={this.handleKeyPress} placeholder="Enter A Song, Album, or Artist" />
+        <input value={this.props.applySavedSearch} onChange={this.handleTermChange} onKeyPress={this.handleKeyPress} placeholder="Enter A Song, Album, or Artist" />
         <button onClick={this.search} className="SearchButton">SEARCH</button>
         </div>
         )

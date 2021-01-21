@@ -15,7 +15,8 @@ class App extends React.Component {
     searchResults: [],
     playlistName: 'New Playlist',
     playlistTracks: [],
-    loading: false
+    loading: false,
+    savedSearch: ''
     }
 
     this.addTrack = this.addTrack.bind(this);
@@ -23,10 +24,17 @@ class App extends React.Component {
     this.updatePlaylistName = this.updatePlaylistName.bind(this);
     this.savePlaylist = this.savePlaylist.bind(this);
     this.search = this.search.bind(this);
+    this.storeSearch = this.storeSearch.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('load', () => {Spotify.getAccessToken()});
+    const savedSearchTerm = localStorage.getItem('savedSearchTerm');
+    if (savedSearchTerm) {
+      this.setState({
+        savedSearch: savedSearchTerm,
+      })
+    }
   }
 
   componentDidUpdate() {
@@ -34,7 +42,6 @@ class App extends React.Component {
     if (this.state.searchResults.length == removeDuplicates.length){
       return;
     }
-    this.setState({ searchResults: removeDuplicates })
   }
 
   addTrack(track) {
@@ -75,15 +82,23 @@ class App extends React.Component {
     });
   }
 
+  storeSearch(savedSearchTerm) {
+    this.setState({
+      savedSearch: savedSearchTerm,
+    });
+    localStorage.setItem('savedSearchTerm', savedSearchTerm);
+  }
+
   render() {
     return (
       <div>
-        {console.log(this.state.loading)}
   <div style={{display: this.state.loading ? 'block' : 'none'}} id="overlay"></div>
   <h1>Ja<span className="highlight">mmm</span>ing</h1>
   <div className="App">
     <SearchBar 
       onSearch={this.search}
+      storeSearch = {this.storeSearch}
+      applySavedSearch={this.state.savedSearch}
     />
     <div className="App-playlist">
       <SearchResults 
