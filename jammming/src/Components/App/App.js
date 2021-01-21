@@ -28,6 +28,17 @@ class App extends React.Component {
     window.addEventListener('load', () => {Spotify.getAccessToken()});
   }
 
+  componentDidUpdate() {
+    console.log("Search results:" + this.state.searchResults.length)
+    console.log("Playlist:" + this.state.playlistTracks.length)
+    let removeDuplicates = this.state.searchResults.filter(duplicate => !this.state.playlistTracks.includes(duplicate));
+    console.log("removeDuplicates:" + removeDuplicates.length)
+    if (this.state.searchResults.length == removeDuplicates.length){
+      return;
+    }
+    this.setState({ searchResults: removeDuplicates })
+  }
+
   addTrack(track) {
     let tracks = this.state.playlistTracks;
     if (tracks.find(savedTrack => savedTrack.id === track.id)) {
