@@ -63,7 +63,6 @@ class App extends React.Component {
         return;
     }
     tracks.push(track);
-    console.log(`add track: ${tracks}`)
     this.setState({playlistTracks: tracks})
     localStorage.setItem('savedPlaylist', JSON.stringify({playlistTracks: tracks}));
   }
