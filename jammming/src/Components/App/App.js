@@ -89,6 +89,7 @@ class App extends React.Component {
         savedSearch: ''
       })
     })
+    localStorage.removeItem("savedPlaylist");
   }
 
   search(term) {
