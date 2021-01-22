@@ -6,6 +6,24 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
+## For local development
+
+In `Spotify.js` edit the redirectUri to `http://localhost:3000`
+
+From the run root directory run `npm start`
+
+## For deployment
+
+In `Spotify.js` edit the redirectUri to `http://uselessmusicapp.surge.sh` or whatever you want the public URL to be
+
+From the run root directory run `npm run build`
+
+run `cd build`
+
+run `surge`
+
+configure URL as `uselessmusicapp.surge.sh` or whatever you want the public URL to be
+
 ### `npm start`
 
 Runs the app in the development mode.\
