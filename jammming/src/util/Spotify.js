@@ -24,7 +24,7 @@ const Spotify = {
         }
     },
 
-    // Uses access token to return a response from the Spoitify API using user serach term from SearchBar
+    // Uses access token to return a response from the Spotify API using user search term from SearchBar
     search(term) {
         const accessToken = Spotify.getAccessToken();
         return fetch(`https://api.spotify.com/v1/search?type=track&q=${term}`, {
