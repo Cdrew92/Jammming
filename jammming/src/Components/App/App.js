@@ -42,6 +42,7 @@ class App extends React.Component {
     if (this.state.searchResults.length == removeDuplicates.length){
       return;
     }
+    this.setState({ searchResults: removeDuplicates })
   }
 
   addTrack(track) {
