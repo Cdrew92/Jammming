@@ -35,6 +35,18 @@ class App extends React.Component {
         savedSearch: savedSearchTerm,
       })
     }
+    const savedPlaylist = localStorage.getItem('savedPlaylist');
+    let parsedSavedPlaylist = JSON.parse(savedPlaylist)
+    let playlistArray = [];
+    for(var i in parsedSavedPlaylist) {
+      playlistArray.push(parsedSavedPlaylist[i]);
+    }
+    let flattenedPlaylistArray = playlistArray.flat();
+        if (flattenedPlaylistArray.length > 0) {
+      this.setState({
+        playlistTracks: flattenedPlaylistArray,
+      })
+    }
   }
 
   componentDidUpdate() {
@@ -51,11 +63,13 @@ class App extends React.Component {
         return;
     }
     tracks.push(track);
-    this.setState({playlistTrack: tracks})
+    console.log(`add track: ${tracks}`)
+    this.setState({playlistTracks: tracks})
+    localStorage.setItem('savedPlaylist', JSON.stringify({playlistTracks: tracks}));
   }
 
   removeTrack(track) {
-    this.setState({playlistTracks : this.state.playlistTracks.filter(playlistTrack => playlistTrack.id !== track.id)})
+    this.setState({playlistTracks : this.state.playlistTracks.filter(playlistTracks => playlistTracks.id !== track.id)})
   }
 
   updatePlaylistName(name) {
@@ -66,7 +80,7 @@ class App extends React.Component {
     if (!this.state.loading) {
       this.setState({ loading: true })
     }
-    const trackUris = this.state.playlistTracks.map(playlistTrack => playlistTrack.uri);
+    const trackUris = this.state.playlistTracks.map(playlistTracks => playlistTracks.uri);
     Spotify.savePlaylist(this.state.playlistName, trackUris).then(() => {
       this.setState({
         playlistName: 'New Playlist',
