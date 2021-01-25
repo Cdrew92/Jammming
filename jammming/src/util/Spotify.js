@@ -1,5 +1,5 @@
-const clientId = "631cff8bc3774a539eb31b67ea05f6c9";
-const redirectUri = "http://uselessmusicapp.surge.sh";
+const clientId = process.env.REACT_APP_API_KEY;
+const redirectUri = "http://spottyplaylist.surge.sh";
 
 let accessToken;
 
